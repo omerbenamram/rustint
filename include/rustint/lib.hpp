@@ -69,13 +69,13 @@ private:
 public:
   T val;
 
-  RInt(T val) : val{val} {}
+  constexpr RInt(T val) : val{val} {}
   constexpr auto operator()() const { return val; }
   static constexpr auto from(T val) { return RInt(val); }
 
-  static constexpr auto MAX = RInt(std::numeric_limits<T>::max());
-  static constexpr auto MIN = RInt(std::numeric_limits<T>::min());
-  static constexpr auto BITS = u32(CHAR_BIT * sizeof(T));
+  static constexpr auto MAX() { return RInt(std::numeric_limits<T>::max()); }
+  static constexpr auto MIN() { return RInt(std::numeric_limits<T>::min()); }
+  static constexpr auto BITS() { return u32(CHAR_BIT * sizeof(T)); }
 
   constexpr auto abs(this RInt self)
     requires std::signed_integral<T>
@@ -262,17 +262,11 @@ public:
 
   constexpr auto leading_zeros(this RInt self) { return TODO_BODY(); }
 
-  constexpr auto max_value(this RInt self, TODO_SIGNATURE rhs) {
-    return TODO_BODY();
-  }
+  static constexpr auto max_value() { return MAX(); }
 
-  constexpr auto midpoint(this RInt self, TODO_SIGNATURE rhs) {
-    return TODO_BODY();
-  }
+  static constexpr auto midpoint() { return TODO_BODY(); }
 
-  constexpr auto min_value(this RInt self, TODO_SIGNATURE rhs) {
-    return TODO_BODY();
-  }
+  static constexpr auto min_value() { return MIN(); }
 
   constexpr auto next_multiple_of(this RInt self, TODO_SIGNATURE rhs) {
     return TODO_BODY();
